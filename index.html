@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="utf-8">
   <title>綠豆生長比較</title>
   <style>
     body {
-      font-family: "PMingLiU", "新細明體", serif; /* 新細明體 */
+      font-family: "PMingLiU", "新細明體", serif;
+      /* 新細明體 */
       background: #f7f7f7;
       margin: 0;
       padding: 20px;
       text-align: center;
     }
+
     h1 {
       margin-bottom: 20px;
     }
+
     .compare-container {
       display: flex;
-      /* 讓所有容器都在同一列，不換行 */
       flex-wrap: nowrap;
-      /* 超出視窗寬度則出現水平捲軸 */
       overflow-x: auto;
-      /* 彼此間距 */
+      /* 若真的超過寬度，會出現水平捲軸 */
       gap: 20px;
       margin: 20px auto;
-      /* 可以移除或改大 max-width 以免擠壓 */
-      /* max-width: 1200px;  <- 可以拿掉或改大 */
+      justify-content: center;
+      /* 水平置中 */
+      align-items: flex-start;
+      /* 頂端對齊 */
     }
+
     /* 單個實驗容器 */
     .exp-block {
-      flex: 0 0 auto; /* 固定寬度，不要被自動壓縮 */
+      flex: 0 0 auto;
+      /* 固定寬度，不要被自動壓縮 */
       width: 200px;
       height: 350px;
       border: 2px solid #ccc;
       position: relative;
       background: #fff;
     }
+
     .exp-title {
       background: #eee;
       padding: 5px 0;
       font-weight: bold;
       border-bottom: 1px solid #ccc;
     }
+
     .seed {
       width: 20px;
       height: 20px;
@@ -51,20 +59,24 @@
       left: 50%;
       transform: translateX(-50%);
     }
+
     .stem {
       width: 4px;
       background-color: green;
       position: absolute;
-      bottom: 20px; /* 從種子頂部開始 */
+      bottom: 20px;
+      /* 從種子頂部開始 */
       left: 50%;
       transform: translateX(-50%);
       height: 0;
     }
+
     .controls {
       margin: 20px;
     }
   </style>
 </head>
+
 <body>
   <h1>綠豆生長比較：同時觀看不同濃度 / 處理物差異</h1>
   <div class="controls">
@@ -90,39 +102,39 @@
     */
     const growthData = {
       fertilizer: {
-        '0%':    { germination: 69, length: 7.61 },
-        '0.1%':  { germination: 61, length: 9.24 },
-        '0.5%':  { germination: 76, length: 8.43 },
-        '1%':    { germination: 61, length: 6.56 },
-        '1.5%':  { germination: 82, length: 9.78 },
-        '2%':    { germination: 62, length: 5.32 },
+        '0%': { germination: 69, length: 7.61 },
+        '0.1%': { germination: 61, length: 9.24 },
+        '0.5%': { germination: 76, length: 8.43 },
+        '1%': { germination: 61, length: 6.56 },
+        '1.5%': { germination: 82, length: 9.78 },
+        '2%': { germination: 62, length: 5.32 },
       },
       chicken: {
-        '0%':    { germination: 69, length: 7.61 },
-        '0.1%':  { germination: 82, length: 10.10 },
-        '0.5%':  { germination: 67, length: 9.69 },
-        '1%':    { germination: 85, length: 9.20 },
-        '1.5%':  { germination: 73, length: 9.58 },
-        '2%':    { germination: 79, length: 9.81 },
+        '0%': { germination: 69, length: 7.61 },
+        '0.1%': { germination: 82, length: 10.10 },
+        '0.5%': { germination: 67, length: 9.69 },
+        '1%': { germination: 85, length: 9.20 },
+        '1.5%': { germination: 73, length: 9.58 },
+        '2%': { germination: 79, length: 9.81 },
       },
       yogurt: {
-        '0%':    { germination: 69, length: 7.61 },
-        '0.1%':  { germination: 75, length: 9.03 },
-        '0.5%':  { germination: 78, length: 8.32 },
-        '1%':    { germination: 71, length: 8.33 },
-        '1.5%':  { germination: 73, length: 10.65 },
-        '2%':    { germination: 63, length: 12.09 },
+        '0%': { germination: 69, length: 7.61 },
+        '0.1%': { germination: 75, length: 9.03 },
+        '0.5%': { germination: 78, length: 8.32 },
+        '1%': { germination: 71, length: 8.33 },
+        '1.5%': { germination: 73, length: 10.65 },
+        '2%': { germination: 63, length: 12.09 },
       },
       contraceptive: {
-        '0%':      { germination: 69, length: 7.61 },
-        '0.01%':   { germination: 59, length: 9.41 },
-        '0.015%':  { germination: 76, length: 10.00 },
-        '0.02%':   { germination: 62, length: 8.86 },
-        '0.025%':  { germination: 79, length: 9.74 },
-        '0.03%':   { germination: 65, length: 8.81 },
-        '0.04%':   { germination: 85, length: 11.07 },
-        '0.05%':   { germination: 67, length: 9.01 },
-        '0.06%':   { germination: 71, length: 11.48 },
+        '0%': { germination: 69, length: 7.61 },
+        '0.01%': { germination: 59, length: 9.41 },
+        '0.015%': { germination: 76, length: 10.00 },
+        '0.02%': { germination: 62, length: 8.86 },
+        '0.025%': { germination: 79, length: 9.74 },
+        '0.03%': { germination: 65, length: 8.81 },
+        '0.04%': { germination: 85, length: 11.07 },
+        '0.05%': { germination: 67, length: 9.01 },
+        '0.06%': { germination: 71, length: 11.48 },
       }
     };
 
@@ -168,7 +180,7 @@
       const stems = document.querySelectorAll('.stem');
       stems.forEach(stem => {
         const germ = parseFloat(stem.dataset.germination);
-        const len  = parseFloat(stem.dataset.length);
+        const len = parseFloat(stem.dataset.length);
 
         // 轉換為動畫參數
         const { finalHeight, duration } = getGrowthParameters(germ, len);
@@ -194,7 +206,7 @@
 
     // 將處理物英文轉中文
     function treatmentName(key) {
-      switch(key) {
+      switch (key) {
         case 'fertilizer': return '肥料';
         case 'chicken': return '雞精';
         case 'yogurt': return '優酪乳';
@@ -207,4 +219,5 @@
     window.onload = updateExperimentBlocks;
   </script>
 </body>
+
 </html>
